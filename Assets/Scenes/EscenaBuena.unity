@@ -262,9 +262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c083b641eb33f419e5eb95ecbc8407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracking: {fileID: 0}
-  poseData: 0000000000000000000000000000000000000000
-  pose: 0
 --- !u!4 &384806248
 Transform:
   m_ObjectHideFlags: 0
@@ -674,6 +671,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7600964698172642944, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 1579440489}
     m_RemovedComponents:
     - {fileID: 6243570158375708920, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
     - {fileID: 3176536338099736530, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
@@ -684,13 +685,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6564760815023116878, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1056448725}
-    - targetCorrespondingSourceObject: {fileID: 6564760815023116878, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1056448730}
-    - targetCorrespondingSourceObject: {fileID: 6564760815023116878, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1056448727}
+    - targetCorrespondingSourceObject: {fileID: 6564760815023116878, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1056448734}
+    - targetCorrespondingSourceObject: {fileID: 6564760815023116878, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1056448733}
     - targetCorrespondingSourceObject: {fileID: 6564760815023116878, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1056448726}
@@ -710,39 +711,6 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2017612741382858997, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
   m_PrefabInstance: {fileID: 1056448721}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1056448725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056448722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32efcffe3effb2f478f11cace8101b81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rb: {fileID: 0}
-  animator: {fileID: 0}
-  renderSprite: {fileID: 1056448724}
-  boxCollider: {fileID: 0}
-  inputDelay: 0.5
-  isGrounded: 0
-  lastActionTime: 0
-  attackPoint: {fileID: 1658988700}
-  attackRadius: 2
-  groundLayer:
-    m_Bits: 1
-  playerLayer:
-    m_Bits: 64
-  groundCheck: {fileID: 1056448723}
-  groundCheckRadius: 0.2
-  datos: {fileID: 1056448730}
-  projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
-  projectileSpeed: 10
-  enemyLayer:
-    m_Bits: 0
 --- !u!65 &1056448726
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -791,7 +759,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1056448730
+--- !u!114 &1056448733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056448722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32efcffe3effb2f478f11cace8101b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 12
+  renderSprite: {fileID: 1056448724}
+  inputDelay: 0.5
+  isGrounded: 0
+  attackPoint: {fileID: 1658988700}
+  attackRadius: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheck: {fileID: 1056448723}
+  groundCheckRadius: 0.2
+  datos: {fileID: 1056448734}
+  projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
+  projectileSpeed: 10
+--- !u!114 &1056448734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -811,13 +808,7 @@ MonoBehaviour:
   staggerFrames: 20
   knockbackForce: 5
   knockbackUpForce: 2
-  currentIFrames: 0
-  currentStagger: 0
-  isStaggered: 0
-  isInvulnerable: 0
-  animator: {fileID: 0}
   renderSprite: {fileID: 1056448724}
-  rb: {fileID: 0}
 --- !u!1001 &1084691408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1038,13 +1029,7 @@ MonoBehaviour:
   staggerFrames: 20
   knockbackForce: 5
   knockbackUpForce: 2
-  currentIFrames: 0
-  currentStagger: 0
-  isStaggered: 0
-  isInvulnerable: 0
-  animator: {fileID: 0}
   renderSprite: {fileID: 1084691412}
-  rb: {fileID: 0}
 --- !u!114 &1084691416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1058,26 +1043,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rb: {fileID: 0}
-  animator: {fileID: 0}
   renderSprite: {fileID: 1084691412}
-  boxCollider: {fileID: 0}
   inputDelay: 0.5
   isGrounded: 0
-  lastActionTime: 0
   attackPoint: {fileID: 1084691411}
   attackRadius: 2
   groundLayer:
+    serializedVersion: 2
     m_Bits: 64
   playerLayer:
+    serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 1084691410}
   groundCheckRadius: 0.2
   datos: {fileID: 1084691415}
   projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
   projectileSpeed: 10
-  enemyLayer:
-    m_Bits: 0
 --- !u!114 &1084691419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,26 +1072,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  rb: {fileID: 0}
-  animator: {fileID: 0}
   renderSprite: {fileID: 0}
-  boxCollider: {fileID: 0}
   inputDelay: 1.5
   isGrounded: 0
-  lastActionTime: 0
   attackPoint: {fileID: 1084691411}
   attackRadius: 0.2
   groundLayer:
+    serializedVersion: 2
     m_Bits: 1
   playerLayer:
+    serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 1084691410}
   groundCheckRadius: 0.2
   datos: {fileID: 1084691415}
   projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
   projectileSpeed: 10
-  enemyLayer:
-    m_Bits: 0
 --- !u!1 &1168688851
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,6 +1193,156 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!90 &1579440489
+Avatar:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Automatic Avatar
+  m_AvatarSize: 832
+  m_Avatar:
+    serializedVersion: 3
+    m_AvatarSkeleton:
+      data:
+        m_Node:
+        - m_ParentId: -1
+          m_AxesId: -1
+        - m_ParentId: 0
+          m_AxesId: -1
+        - m_ParentId: 0
+          m_AxesId: -1
+        - m_ParentId: 0
+          m_AxesId: -1
+        m_ID: 000000008db83ff442c775fb84027200
+        m_AxesArray: []
+    m_AvatarSkeletonPose:
+      data:
+        m_X:
+        - t: {x: -6.53, y: -2.18, z: 2.7}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 2.5290296, y: 2.8776486, z: 1}
+        - t: {x: 0.01, y: 0.06, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.33950096, y: 0.3154574, z: 1}
+        - t: {x: 0.63, y: 0.8479144, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.3954086, y: 0.34750593, z: 1}
+        - t: {x: 0.0168, y: 0.581, z: 0.2}
+          q: {x: 0.6663586, y: -0, z: -0, w: 0.74563146}
+          s: {x: 0.05838792, y: 0.15939766, z: 0.117213495}
+    m_DefaultPose:
+      data:
+        m_X:
+        - t: {x: -6.53, y: -2.18, z: 2.7}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 2.5290296, y: 2.8776486, z: 1}
+        - t: {x: 0.01, y: 0.06, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.33950096, y: 0.3154574, z: 1}
+        - t: {x: 0.63, y: 0.8479144, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.3954086, y: 0.34750593, z: 1}
+        - t: {x: 0.0168, y: 0.581, z: 0.2}
+          q: {x: 0.6663586, y: -0, z: -0, w: 0.74563146}
+          s: {x: 0.05838792, y: 0.15939766, z: 0.117213495}
+    m_SkeletonNameIDArray: 000000008db83ff442c775fb84027200
+    m_Human:
+      data:
+        serializedVersion: 2
+        m_RootX:
+          t: {x: 0, y: 0, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        m_Skeleton:
+          data:
+            m_Node: []
+            m_ID: 
+            m_AxesArray: []
+        m_SkeletonPose:
+          data:
+            m_X: []
+        m_LeftHand:
+          data:
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_RightHand:
+          data:
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneMass:
+        - 0.14545456
+        - 0.12121213
+        - 0.12121213
+        - 0.048484854
+        - 0.048484854
+        - 0.009696971
+        - 0.009696971
+        - 0.030303033
+        - 0.14545456
+        - 0.14545456
+        - 0.012121214
+        - 0.048484854
+        - 0.006060607
+        - 0.006060607
+        - 0.024242427
+        - 0.024242427
+        - 0.01818182
+        - 0.01818182
+        - 0.006060607
+        - 0.006060607
+        - 0.0024242427
+        - 0.0024242427
+        - 0
+        - 0
+        - 0
+        m_Scale: 1
+        m_ArmTwist: 0.5
+        m_ForeArmTwist: 0.5
+        m_UpperLegTwist: 0.5
+        m_LegTwist: 0.5
+        m_ArmStretch: 0.05
+        m_LegStretch: 0.05
+        m_FeetSpacing: 0
+        m_HasLeftHand: 0
+        m_HasRightHand: 0
+        m_HasTDoF: 0
+    m_HumanSkeletonIndexArray: 
+    m_HumanSkeletonReverseIndexArray: 
+    m_RootMotionBoneIndex: -1
+    m_RootMotionBoneX:
+      t: {x: 0, y: 0, z: 0}
+      q: {x: 0, y: 0, z: 0, w: 1}
+      s: {x: 1, y: 1, z: 1}
+    m_RootMotionSkeleton:
+      data:
+        m_Node: []
+        m_ID: 
+        m_AxesArray: []
+    m_RootMotionSkeletonPose:
+      data:
+        m_X: []
+    m_RootMotionSkeletonIndexArray: 
+  m_TOS:
+    4218799938: attackObject
+    4097816717: groundCheck
+    0: 
+    7471748: Plane
+  m_HumanDescription:
+    serializedVersion: 3
+    m_Human: []
+    m_Skeleton: []
+    m_ArmTwist: 0.5
+    m_ForeArmTwist: 0.5
+    m_UpperLegTwist: 0.5
+    m_LegTwist: 0.5
+    m_ArmStretch: 0.05
+    m_LegStretch: 0.05
+    m_FeetSpacing: 0
+    m_GlobalScale: 1
+    m_RootMotionBoneName: 
+    m_HasTranslationDoF: 0
+    m_HasExtraRoot: 0
+    m_SkeletonHasParents: 1
 --- !u!4 &1658988700 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 620088525062775892, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
