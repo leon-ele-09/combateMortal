@@ -250,7 +250,6 @@ MonoBehaviour:
   startRecieving: 1
   printToConsole: 0
   data: 
-  yeah: 1
 --- !u!114 &384806247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5013221366626610862, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.75
+      value: -6.53
       objectReference: {fileID: 0}
     - target: {fileID: 5013221366626610862, guid: 0c40df9c5aef87b4382f639fc932c766, type: 3}
       propertyPath: m_LocalPosition.y
@@ -724,22 +723,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  rb: {fileID: 0}
+  animator: {fileID: 0}
   renderSprite: {fileID: 1056448724}
+  boxCollider: {fileID: 0}
   inputDelay: 0.5
   isGrounded: 0
+  lastActionTime: 0
   attackPoint: {fileID: 1658988700}
   attackRadius: 2
   groundLayer:
-    serializedVersion: 2
     m_Bits: 1
   playerLayer:
-    serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1056448723}
   groundCheckRadius: 0.2
   datos: {fileID: 1056448730}
   projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
   projectileSpeed: 10
+  enemyLayer:
+    m_Bits: 0
 --- !u!65 &1056448726
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -808,7 +811,13 @@ MonoBehaviour:
   staggerFrames: 20
   knockbackForce: 5
   knockbackUpForce: 2
+  currentIFrames: 0
+  currentStagger: 0
+  isStaggered: 0
+  isInvulnerable: 0
+  animator: {fileID: 0}
   renderSprite: {fileID: 1056448724}
+  rb: {fileID: 0}
 --- !u!1001 &1084691408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1029,7 +1038,13 @@ MonoBehaviour:
   staggerFrames: 20
   knockbackForce: 5
   knockbackUpForce: 2
+  currentIFrames: 0
+  currentStagger: 0
+  isStaggered: 0
+  isInvulnerable: 0
+  animator: {fileID: 0}
   renderSprite: {fileID: 1084691412}
+  rb: {fileID: 0}
 --- !u!114 &1084691416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1043,22 +1058,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  rb: {fileID: 0}
+  animator: {fileID: 0}
   renderSprite: {fileID: 1084691412}
+  boxCollider: {fileID: 0}
   inputDelay: 0.5
   isGrounded: 0
+  lastActionTime: 0
   attackPoint: {fileID: 1084691411}
   attackRadius: 2
   groundLayer:
-    serializedVersion: 2
     m_Bits: 64
   playerLayer:
-    serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 1084691410}
   groundCheckRadius: 0.2
   datos: {fileID: 1084691415}
   projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
   projectileSpeed: 10
+  enemyLayer:
+    m_Bits: 0
 --- !u!114 &1084691419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,22 +1091,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
+  rb: {fileID: 0}
+  animator: {fileID: 0}
   renderSprite: {fileID: 0}
+  boxCollider: {fileID: 0}
   inputDelay: 1.5
   isGrounded: 0
+  lastActionTime: 0
   attackPoint: {fileID: 1084691411}
   attackRadius: 0.2
   groundLayer:
-    serializedVersion: 2
     m_Bits: 1
   playerLayer:
-    serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 1084691410}
   groundCheckRadius: 0.2
   datos: {fileID: 1084691415}
   projectilePrefab: {fileID: 2358005956534647892, guid: a91f3df478b14864b9284d1193a8a4d2, type: 3}
   projectileSpeed: 10
+  enemyLayer:
+    m_Bits: 0
 --- !u!1 &1168688851
 GameObject:
   m_ObjectHideFlags: 0
