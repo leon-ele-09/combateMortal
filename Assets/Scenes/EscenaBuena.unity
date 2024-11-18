@@ -1072,11 +1072,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  renderSprite: {fileID: 0}
-  inputDelay: 1.5
+  renderSprite: {fileID: 1084691412}
+  inputDelay: 1
   isGrounded: 0
   attackPoint: {fileID: 1084691411}
-  attackRadius: 0.2
+  attackRadius: 2
   groundLayer:
     serializedVersion: 2
     m_Bits: 1

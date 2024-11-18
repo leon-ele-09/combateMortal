@@ -64,19 +64,19 @@ void Update()
     CheckGrounded();
 
 
-    //HandleMovement();
+        //HandleMovement();
 
 
-    //if (Time.time - lastActionTime >= inputDelay && isGrounded)
-    //{
-    //    if (HandleCombat() == 1)
-    //    {
+        if (Time.time - lastActionTime >= inputDelay && isGrounded)
+        {
+            if (NPCAlgorithm() == 1)
+            {
 
-    //        lastActionTime = Time.time;
+                lastActionTime = Time.time;
 
-    //    }
-    //}
-    HandleVisuals();
+            }
+        }
+        HandleVisuals();
 
 
 
@@ -108,13 +108,47 @@ private void HandleMovement()
     rb.velocity = newVelocity;
 }
 
-private int HandleCombat()
+
+    private int NPCAlgorithm() {
+
+        
+        bool isInRange = Physics.CheckSphere(
+        attackPoint.position,
+        attackRadius,
+        playerLayer,
+        QueryTriggerInteraction.Ignore
+        );
+
+        if (isInRange == false)
+        {
+            // Ataque ligero, solamente si no tiene nada en rango
+            if (Random.Range(0, 100) < 70)
+                return HandleCombat(0);
+
+            // Special, si no tiene en rango. Random
+            return HandleCombat(3);
+
+        }
+
+        else
+        {
+            // Ataque fuerte, si tiene en rango al enemigo
+            if (Random.Range(0, 100) < 70)
+            return HandleCombat(1);
+
+            // Bloque, al azar si tiene en rango al enemigo
+            return HandleCombat(2);
+        }
+
+
+    }
+private int HandleCombat(int AI)
 {
 
     if (!datos.CanAct()) return 0;
 
     // Ataque ligero
-    if (Input.GetKeyDown(KeyCode.J))
+    if (AI == 0)
     {
         int backwards;
         if (renderSprite.flipX) { backwards = 1; }
@@ -139,7 +173,7 @@ private int HandleCombat()
     }
 
     // Ataque pesado
-    if (Input.GetKeyDown(KeyCode.K))
+    if (AI == 1)
     {
         animator.SetBool("Attack", true);
         Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRadius, playerLayer);
@@ -161,7 +195,7 @@ private int HandleCombat()
 
 
     // Bloqueo
-    if (Input.GetKeyDown(KeyCode.L))
+    if (AI == 2)
     {
         animator.SetBool("Hurt", true);
 
@@ -178,14 +212,14 @@ private int HandleCombat()
 
     // Special
 
-    if (Input.GetKeyDown(KeyCode.I))
+    if (AI == 3)
     {
         // Determine the direction the player is facing (forward in the Z-axis)
         if (datos.superGauge >= 3)
         {
             // Instantiate the projectile at the attackPoint
             GameObject projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
-            Vector3 direction = new Vector3(2f, 0f, 0f);
+            Vector3 direction = new Vector3(-2f, 0f, 0f);
             // Apply a force to the projectile to move it in the right direction
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
             projectileRb.velocity = direction * projectileSpeed;  // Moving the projectile along the Z-axis
