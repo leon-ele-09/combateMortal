@@ -344,7 +344,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 199808632}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1791603990}
+        m_TargetAssemblyTypeName: SeleccionPersonaje, Assembly-CSharp
+        m_MethodName: SeleccionarPersonaje
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &199808632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,6 +707,7 @@ GameObject:
   - component: {fileID: 580467241}
   - component: {fileID: 580467243}
   - component: {fileID: 580467242}
+  - component: {fileID: 580467244}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -818,6 +831,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580467240}
   m_CullTransparentMesh: 1
+--- !u!114 &580467244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580467240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a317ce9501c0c641999a7451c65ddaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personajes: []
+  imagenPersonaje: []
+  botonesSeleccion: []
+  botonJugar: {fileID: 0}
 --- !u!1 &853125166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,10 +1416,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1924973819}
-        m_TargetAssemblyTypeName: FuncionesMenu, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 5
+      - m_Target: {fileID: 1791603990}
+        m_TargetAssemblyTypeName: SeleccionPersonaje, Assembly-CSharp
+        m_MethodName: Jugar
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1728,7 +1757,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1576955536}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1791603990}
+        m_TargetAssemblyTypeName: SeleccionPersonaje, Assembly-CSharp
+        m_MethodName: SeleccionarPersonaje
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1576955536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1901,6 +1942,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720447088}
   m_CullTransparentMesh: 1
+--- !u!1 &1791603989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791603991}
+  - component: {fileID: 1791603990}
+  m_Layer: 0
+  m_Name: ControladorMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1791603990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791603989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a317ce9501c0c641999a7451c65ddaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personajes:
+  - nombre: Goku
+    salud: 300
+    dano: 50
+    vida: 250
+    imagen: {fileID: 0}
+  - nombre: Toad
+    salud: 250
+    dano: 40
+    vida: 300
+    imagen: {fileID: 0}
+  - nombre: Woody
+    salud: 350
+    dano: 35
+    vida: 200
+    imagen: {fileID: 0}
+  imagenPersonaje:
+  - {fileID: 283656251}
+  - {fileID: 2082760528}
+  - {fileID: 858630613}
+  botonesSeleccion: []
+  botonJugar: {fileID: 1334490949}
+--- !u!4 &1791603991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791603989}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 515.4589, y: 208.68501, z: -2.7320976}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1792432645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2416,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2090951504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1791603990}
+        m_TargetAssemblyTypeName: SeleccionPersonaje, Assembly-CSharp
+        m_MethodName: SeleccionarPersonaje
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2090951504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2357,3 +2476,4 @@ SceneRoots:
   - {fileID: 971748183}
   - {fileID: 35109543}
   - {fileID: 1924973820}
+  - {fileID: 1791603991}
