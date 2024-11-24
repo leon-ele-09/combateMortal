@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MenuPrincipal.unity
+    guid: 7c3a16ad66fbe104ca62a44b07f02bdd
+  - enabled: 1
+    path: Assets/Scenes/ElegirPersonaje.unity
+    guid: 0612b11374fa72243bf9783f7d570d51
+  - enabled: 1
+    path: Assets/Scenes/ElegirEnemigo.unity
+    guid: 3916c6693a2eeae45b0a3502494a8b2a
+  - enabled: 1
+    path: Assets/Scenes/ElegirMapa.unity
+    guid: a4fd29a03dd8c6d47ae1ac73726ead61
+  - enabled: 1
+    path: Assets/Scenes/EscenaBuena.unity
+    guid: aef4dc1f65a3b2048b8bd950d6fb6686
   m_configObjects: {}

@@ -8,7 +8,7 @@ public class Poses : MonoBehaviour
 
     //public HandTracking tracking;
     //public int[] poseData = new int[5];
-    //public int pose;
+    public int pose;
 
     //void Start()
     //{

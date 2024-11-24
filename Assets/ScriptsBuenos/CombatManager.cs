@@ -221,7 +221,7 @@ public class CombatManager : MonoBehaviour
         timeElapsed = 0f;
 
         // Fade to black (increase alpha to 1)
-        while (timeElapsed < fadeDuration*.9)
+        while (timeElapsed < fadeDuration * .9)
         {
             fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration));
             timeElapsed += Time.unscaledDeltaTime;  // Use unscaledDeltaTime for the fade
