@@ -346,8 +346,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1924973823}
-        m_TargetAssemblyTypeName: SeleccionDePersonajes, Assembly-CSharp
-        m_MethodName: SelectPlayer
+        m_TargetAssemblyTypeName: PlayerSelector, Assembly-CSharp
+        m_MethodName: selectPlayer
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1742,8 +1742,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1924973823}
-        m_TargetAssemblyTypeName: SeleccionDePersonajes, Assembly-CSharp
-        m_MethodName: SelectPlayer
+        m_TargetAssemblyTypeName: PlayerSelector, Assembly-CSharp
+        m_MethodName: selectPlayer
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2202,14 +2202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35e71d0834f59648b63453f26493bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionBoxes:
-  - {fileID: 283656251}
-  - {fileID: 2082760528}
-  - {fileID: 858630613}
-  prefabs:
-  - {fileID: 1576955533}
-  - {fileID: 199808629}
-  - {fileID: 2090951501}
 --- !u!114 &1924973823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2219,72 +2211,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924973818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f5b00b5ff689b444bcc6fba6c50212c, type: 3}
+  m_Script: {fileID: 11500000, guid: 90d2edd07445d82409cda79f9b60581c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombrePersonaje: 
-  vidaMaxima: 0
-  superGaugeMax: 0
-  iFramesDuration: 0
-  staggerFrames: 0
-  knockbackForce: 0
-  moveSpeed: 0
-  projectileSpeed: 0
-  inputDelay: 0
-  attackRadius: 0
-  enemySelectionBoxes: []
-  enemyPrefabs: []
-  selectionBoxes:
+  GokuPlayer: 0
+  ToadPlayer: 0
+  WoodyPlayer: 0
+  SelectionBoxes:
   - {fileID: 283656251}
   - {fileID: 2082760528}
   - {fileID: 858630613}
-  prefabs:
+  Prefabs:
   - {fileID: 1576955533}
   - {fileID: 199808629}
   - {fileID: 2090951501}
-  personajes:
-  - nombrePersonaje: Goku
-    vidaMaxima: 100
-    superGaugeMax: 15
-    iFramesDuration: 30
-    staggerFrames: 20
-    knockbackForce: 5
-    moveSpeed: 12
-    projectileSpeed: 10
-    danioAtaqueLigero: 2
-    danioAtaquePesado: 5
-    danioAtaqueEspecial: 6
-    costoSuper: 3
-    attackRadius: 2
-    inputDelay: 1.5
-  - nombrePersonaje: Toad
-    vidaMaxima: 120
-    superGaugeMax: 12
-    iFramesDuration: 35
-    staggerFrames: 25
-    knockbackForce: 6
-    moveSpeed: 10
-    projectileSpeed: 8
-    danioAtaqueLigero: 3
-    danioAtaquePesado: 7
-    danioAtaqueEspecial: 8
-    costoSuper: 4
-    attackRadius: 2
-    inputDelay: 1.5
-  - nombrePersonaje: Woody
-    vidaMaxima: 80
-    superGaugeMax: 18
-    iFramesDuration: 25
-    staggerFrames: 15
-    knockbackForce: 4
-    moveSpeed: 14
-    projectileSpeed: 12
-    danioAtaqueLigero: 2
-    danioAtaquePesado: 4
-    danioAtaqueEspecial: 5
-    costoSuper: 2
-    attackRadius: 2
-    inputDelay: 1.5
 --- !u!1 &2082760526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,8 +2385,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1924973823}
-        m_TargetAssemblyTypeName: SeleccionDePersonajes, Assembly-CSharp
-        m_MethodName: SelectPlayer
+        m_TargetAssemblyTypeName: PlayerSelector, Assembly-CSharp
+        m_MethodName: selectPlayer
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

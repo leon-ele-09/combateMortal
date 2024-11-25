@@ -12,6 +12,7 @@ public class FuncionesMenu : MonoBehaviour
 
     }
     
+
     public void Salir()
     {
         Application.Quit();

@@ -366,8 +366,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1924973823}
-        m_TargetAssemblyTypeName: SeleccionDePersonajes, Assembly-CSharp
-        m_MethodName: SelectEnemy
+        m_TargetAssemblyTypeName: EnemySelector, Assembly-CSharp
+        m_MethodName: selectEnemy
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -717,7 +717,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: ElegirMapa
+          m_StringArgument: EscenaBuena
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &689228410
@@ -952,8 +952,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1924973823}
-        m_TargetAssemblyTypeName: SeleccionDePersonajes, Assembly-CSharp
-        m_MethodName: SelectEnemy
+        m_TargetAssemblyTypeName: EnemySelector, Assembly-CSharp
+        m_MethodName: selectEnemy
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1353,8 +1353,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1924973823}
-        m_TargetAssemblyTypeName: SeleccionDePersonajes, Assembly-CSharp
-        m_MethodName: SelectEnemy
+        m_TargetAssemblyTypeName: EnemySelector, Assembly-CSharp
+        m_MethodName: selectEnemy
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2344,19 +2344,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924973818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f5b00b5ff689b444bcc6fba6c50212c, type: 3}
+  m_Script: {fileID: 11500000, guid: 94bbcfd4da686c74788546f117323ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nombrePersonaje: 
-  vidaMaxima: 0
-  superGaugeMax: 0
-  iFramesDuration: 0
-  staggerFrames: 0
-  knockbackForce: 0
-  moveSpeed: 0
-  projectileSpeed: 0
-  inputDelay: 0
-  attackRadius: 0
+  Goku: 0
+  Toad: 0
+  Woody: 0
   enemySelectionBoxes:
   - {fileID: 2068442052}
   - {fileID: 665301041}
@@ -2365,51 +2358,6 @@ MonoBehaviour:
   - {fileID: 936029552}
   - {fileID: 761616797}
   - {fileID: 555581339}
-  selectionBoxes: []
-  prefabs: []
-  personajes:
-  - nombrePersonaje: Goku
-    vidaMaxima: 100
-    superGaugeMax: 15
-    iFramesDuration: 30
-    staggerFrames: 20
-    knockbackForce: 5
-    moveSpeed: 12
-    projectileSpeed: 10
-    danioAtaqueLigero: 2
-    danioAtaquePesado: 5
-    danioAtaqueEspecial: 6
-    costoSuper: 3
-    attackRadius: 2
-    inputDelay: 1.5
-  - nombrePersonaje: Toad
-    vidaMaxima: 120
-    superGaugeMax: 12
-    iFramesDuration: 35
-    staggerFrames: 25
-    knockbackForce: 6
-    moveSpeed: 10
-    projectileSpeed: 8
-    danioAtaqueLigero: 3
-    danioAtaquePesado: 7
-    danioAtaqueEspecial: 8
-    costoSuper: 4
-    attackRadius: 2
-    inputDelay: 1.5
-  - nombrePersonaje: Woody
-    vidaMaxima: 80
-    superGaugeMax: 18
-    iFramesDuration: 25
-    staggerFrames: 15
-    knockbackForce: 4
-    moveSpeed: 14
-    projectileSpeed: 12
-    danioAtaqueLigero: 2
-    danioAtaquePesado: 4
-    danioAtaqueEspecial: 5
-    costoSuper: 2
-    attackRadius: 2
-    inputDelay: 1.5
 --- !u!1 &2068442050
 GameObject:
   m_ObjectHideFlags: 0

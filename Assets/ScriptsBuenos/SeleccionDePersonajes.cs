@@ -19,10 +19,10 @@ public class SeleccionDePersonajes : MonoBehaviour
     public float inputDelay;
     public float attackRadius;
 
-    public Image[] enemySelectionBoxes;
-    public GameObject[] enemyPrefabs;
-    public Image[] selectionBoxes;
-    public GameObject[] prefabs;
+    public Image[] enemySelectionBoxes = new Image[3];
+    public GameObject[] enemyPrefabs = new GameObject[3];
+    public Image[] selectionBoxes = new Image[3];
+    public GameObject[] prefabs = new GameObject[3];
 
     void Start()
     {
