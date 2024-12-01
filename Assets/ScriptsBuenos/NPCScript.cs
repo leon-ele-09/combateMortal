@@ -12,14 +12,19 @@ public bool isGrounded;
 
 private float lastActionTime;
 
-/*
- aniadir colision de golpe, reducir vida, aumentar carga, aniadir muerte usando las funciones de ManejoDatos
- - IA para el NPC, se acerca y se pone a golpear, cuando esta en rango tiene un X chance de hacer un dodge
- - Meter colision entre jugador y NPC para que no se traspasen
- - Meter knockback con los ataques
 
- */
-public Transform attackPoint;
+    public AudioClip hitsfx;
+    public AudioClip blastsfx;
+
+
+    /*
+     aniadir colision de golpe, reducir vida, aumentar carga, aniadir muerte usando las funciones de ManejoDatos
+     - IA para el NPC, se acerca y se pone a golpear, cuando esta en rango tiene un X chance de hacer un dodge
+     - Meter colision entre jugador y NPC para que no se traspasen
+     - Meter knockback con los ataques
+
+     */
+    public Transform attackPoint;
 public float attackRadius = 0.2f;
 
 public LayerMask groundLayer;
@@ -164,7 +169,9 @@ private int HandleCombat(int AI)
                 EntityData targetData = hit.GetComponent<EntityData>();
                 if (targetData != null)
                 {
-                    targetData.reducirVida(2, transform.position);
+                        MusicManager manager = FindObjectOfType<MusicManager>();
+                        manager.PlaySFX(hitsfx);
+                        targetData.reducirVida(2, transform.position);
                     datos.aumentarSuper(1);
                 }
             }
@@ -185,7 +192,9 @@ private int HandleCombat(int AI)
                 EntityData targetData = hit.GetComponent<EntityData>();
                 if (targetData != null)
                 {
-                    targetData.reducirVida(5, transform.position);
+                        MusicManager manager = FindObjectOfType<MusicManager>();
+                        manager.PlaySFX(hitsfx);
+                        targetData.reducirVida(5, transform.position);
                     datos.aumentarSuper(2);
                 }
             }
@@ -230,7 +239,9 @@ private int HandleCombat(int AI)
             {
                 projectileScript.enemyLayer = enemyLayer;  // Set the enemy layer to check for collisions
             }
-            datos.aumentarSuper(-3);
+                MusicManager manager = FindObjectOfType<MusicManager>();
+                manager.PlaySFX(blastsfx);
+                datos.aumentarSuper(-3);
             return 1;
         }
     }

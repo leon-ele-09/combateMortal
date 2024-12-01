@@ -9,6 +9,8 @@ public class EntityData : MonoBehaviour
     public int superGaugeMax = 15;
     public int superGauge;
 
+    public int points;
+
     [Header("Combat Properties")]
     public int iFramesDuration = 30;  // Duración de invulnerabilidad en frames
     public int staggerFrames = 20;    // Duración del stagger en frames

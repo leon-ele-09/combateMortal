@@ -15,6 +15,9 @@ public class CombatManager : MonoBehaviour
     public Transform p2_t;
 
     public TextMeshProUGUI timerText;  // Text for showing the timer
+    public TextMeshProUGUI pointText;  // Text for showing the timer
+
+
     public Slider player1HealthSlider;  // Slider for player 1's health
     public Slider player2HealthSlider;  // Slider for player 2's health
 
@@ -40,9 +43,20 @@ public class CombatManager : MonoBehaviour
 
     public GameObject fadePanel;
 
+    public float bounceDuration = 0.5f;  // Duration of the bounce effect
+    public float bounceScale = 1.2f;  // How much bigger the text will scale
+    public float bounceSpeed = 0.5f; // Speed factor for scaling
+
+    private Vector3 originalScale; // To store the original scale for resetting
+
+    string current;
+
     void Start()
     {
         timer = roundTime;
+        pointText.text = player1.points.ToString();
+        originalScale = pointText.transform.localScale;
+        current = pointText.text;
 
         // Initialize the sliders to the players' max health
         player1HealthSlider.maxValue = player1.vidaMaxima;
@@ -70,6 +84,7 @@ public class CombatManager : MonoBehaviour
         CheckHealthStatus();
         UpdateTimerDisplay();
         UpdateHealthSliders();  // Update health sliders smoothly
+        UpdatePointDisplay();
     }
 
     private void UpdateTimerDisplay()
@@ -77,6 +92,62 @@ public class CombatManager : MonoBehaviour
         // Update the timer text, rounded up to the nearest whole number
         timerText.text = Mathf.Ceil(timer).ToString();
     }
+
+    private void UpdatePointDisplay()
+    {
+        // Update the text with the current points
+        
+
+        if(current != player1.points.ToString()) {
+
+            current = pointText.text;
+
+            pointText.text = player1.points.ToString();
+
+            // Start the bounce effect when the points are updated
+            StartCoroutine(BounceEffect());
+
+        }
+        
+    }
+
+
+    private IEnumerator BounceEffect()
+    {
+        // Ensure the text starts with its original scale (in case of too many points)
+        pointText.transform.localScale = originalScale;
+
+        // Scale up the text a bit for the bounce effect
+        Vector3 targetScale = originalScale * bounceScale;
+        float timeElapsed = 0f;
+
+        // Scale up quickly using a smooth function (faster)
+        while (timeElapsed < bounceDuration)
+        {
+            float t = timeElapsed / bounceDuration;
+            pointText.transform.localScale = Vector3.Lerp(originalScale, targetScale, Mathf.SmoothStep(0f, 1f, t * bounceSpeed));
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the text is fully scaled up at the end of the scaling up phase
+        pointText.transform.localScale = targetScale;
+
+        // Now, scale back down to the original size more slowly
+        timeElapsed = 0f;
+        while (timeElapsed < bounceDuration)
+        {
+            float t = timeElapsed / bounceDuration;
+            pointText.transform.localScale = Vector3.Lerp(targetScale, originalScale, Mathf.SmoothStep(0f, 1f, t * bounceSpeed));
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Finally, ensure it's back to the original scale
+        pointText.transform.localScale = originalScale;
+    }
+
+
 
     private void UpdateHealthSliders()
     {
@@ -136,7 +207,7 @@ public class CombatManager : MonoBehaviour
             else
             {
                 s2_p1.color = Color.yellow;  // Highlight Player 1's second stock
-                StartCoroutine(endOfCombat());  // Start the endOfCombat coroutine
+                StartCoroutine(endOfCombat(1));  // Start the endOfCombat coroutine
                 return;  // Exit early, preventing the reset from happening immediately
             }
         }
@@ -151,7 +222,7 @@ public class CombatManager : MonoBehaviour
             else
             {
                 s2_p2.color = Color.yellow;  // Highlight Player 2's second stock
-                StartCoroutine(endOfCombat());  // Start the endOfCombat coroutine
+                StartCoroutine(endOfCombat(2));  // Start the endOfCombat coroutine
                 return;  // Exit early, preventing the reset from happening immediately
             }
         }
@@ -197,42 +268,49 @@ public class CombatManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private IEnumerator endOfCombat()
+
+    private IEnumerator endOfCombat(int winner)
     {
-        // Step 1: Smoothly Lerp Time.timeScale to 0
-        float targetTimeScale = 0f;  // The target time scale (0 for pause)
-        float lerpDuration = 2f;     // Duration for the lerp transition
-        float timeElapsed = 0f;
+        // Load the "MenuPrincipal" scene, which will automatically unload the current scene
 
-        // Lerp Time.timeScale from 1 to 0
-        while (timeElapsed < lerpDuration)
+        PlayerPrefs.SetInt("Player1Points", player1.points);
+
+        if (winner == 1)
         {
-            Time.timeScale = Mathf.Lerp(1f, targetTimeScale, timeElapsed / lerpDuration);
-            timeElapsed += Time.unscaledDeltaTime;  // Use unscaledDeltaTime to avoid time scale issues
-            yield return null;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Winner");
+
         }
 
-        // Ensure Time.timeScale is fully set to 0 after Lerp
-        Time.timeScale = targetTimeScale;
-
-        // Step 2: Fade to black (using the fadePanel)
-        Image fadeImage = fadePanel.GetComponent<Image>();
-        float fadeDuration = 2f;  // Duration of the fade in seconds
-        timeElapsed = 0f;
-
-        // Fade to black (increase alpha to 1)
-        while (timeElapsed < fadeDuration * .9)
+        if (winner == 2)
         {
-            fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(0f, 1f, timeElapsed / fadeDuration));
-            timeElapsed += Time.unscaledDeltaTime;  // Use unscaledDeltaTime for the fade
-            yield return null;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Loser");
+
         }
-        fadeImage.color = new Color(0, 0, 0, 1);  // Ensure it is fully black
-
-        Time.timeScale = 1;
-
-
+        // Optionally, you can yield here if you need some delay before switching
+        // (for example, you may want a short pause or transition animation before loading the next scene)
+        yield return null;  // Empty yield, can be replaced with a delay if needed
     }
+
+    public void endOfCombatGUI(int winner)
+    {
+        // Load the "MenuPrincipal" scene, which will automatically unload the current scene
+
+        PlayerPrefs.SetInt("Player1Points", player1.points);
+
+        if (winner == 1)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Winner");
+
+        }
+
+        if (winner == 2)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Loser");
+
+        }
+        
+    }
+
 
 
 

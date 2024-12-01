@@ -73,20 +73,39 @@ public class ReplaceSpritesFromFolder : EditorWindow
 
     Dictionary<string, Sprite> LoadSpritesFromSheet(Object spriteSheet)
     {
-        var sprites = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(spriteSheet));
+        // Get the path of the sprite sheet asset
+        string spriteSheetPath = AssetDatabase.GetAssetPath(spriteSheet);
+
+        // Load all assets at the path of the sprite sheet
+        var sprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheetPath);
         var spriteDict = new Dictionary<string, Sprite>();
 
+        Debug.Log($"Looking for sprites in: {spriteSheetPath}");
+
+        // Loop through all assets found in the sprite sheet
         foreach (var asset in sprites)
         {
-            if (asset is Sprite sprite && sprite.name.StartsWith(spriteSheetName)) // Check if sprite starts with the new name prefix
+            // Check if the asset is a Sprite
+            if (asset is Sprite sprite)
             {
-                spriteDict[sprite.name] = sprite;
+                Debug.Log($"Found sprite: {sprite.name}");
+
+                // Check if the sprite name starts with the new prefix (Woody_)
+                if (sprite.name.StartsWith(spriteSheetName)) // spriteSheetName is the new prefix
+                {
+                    spriteDict[sprite.name] = sprite;  // Add to the dictionary
+                }
+                else
+                {
+                    Debug.LogWarning($"Sprite '{sprite.name}' does not start with the expected prefix '{spriteSheetName}'");
+                }
             }
         }
 
         Debug.Log($"Loaded {spriteDict.Count} sprites from sprite sheet: {spriteSheet.name}");
         return spriteDict;
     }
+
 
     bool ReplaceSpritesInClip(AnimationClip clip, Dictionary<string, Sprite> newSprites)
     {

@@ -9,19 +9,22 @@ public class CodigoVolumen : MonoBehaviour
     public Slider slider;
     public float sliderValue;
     public Image imageMute;
+    public AudioSource audioSource;
 
     private void Start()
     {
+        sliderValue = slider.value;
         slider.value = PlayerPrefs.GetFloat("VolumenAudio", 0.5f);
-        AudioListener.volume = slider.value;
+        audioSource.volume = slider.value;
         RevisarSiEstoyMute();
     }
 
     public void ChangeSlider(float Valor)
     {
         slider.value = Valor;
+        sliderValue = slider.value;
         PlayerPrefs.SetFloat("VolumenAudio",sliderValue);
-        AudioListener.volume = sliderValue;
+        audioSource.volume = sliderValue;
         RevisarSiEstoyMute();
     }
 

@@ -10,7 +10,7 @@ public class UDPReceive : MonoBehaviour
 
     Thread receiveThread;
     UdpClient client; 
-    public int port = 5052;
+    public int port = 2000;
     public bool startRecieving = true;
     public bool printToConsole = false;
     public string data;
@@ -25,12 +25,31 @@ public class UDPReceive : MonoBehaviour
         receiveThread.Start();
     }
 
+    private void OnDestroy()
+    {
+        startRecieving = false;
+        if(receiveThread != null)
+        {
+
+            receiveThread.Abort();
+            receiveThread = null;
+
+        }
+
+        if(client != null)
+        {
+            client.Close();
+        }
+    }
+
 
     // receive thread
     private void ReceiveData()
     {
 
-        client = new UdpClient(port);
+        client = new UdpClient(new IPEndPoint(IPAddress.Any, port));
+        client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
         while (startRecieving)
         {
 

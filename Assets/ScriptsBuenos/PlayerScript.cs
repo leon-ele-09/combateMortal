@@ -1,5 +1,7 @@
 using System;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -11,8 +13,12 @@ public class PlayerScript : MonoBehaviour
     private BoxCollider boxCollider;
     public float inputDelay = 1.5f;
     public bool isGrounded;
+    public Poses poses;
     
     private float lastActionTime;
+
+    public AudioClip hitsfx;
+    public AudioClip blastsfx;
 
     /*
      aniadir colision de golpe, reducir vida, aumentar carga, aniadir muerte usando las funciones de ManejoDatos
@@ -36,11 +42,13 @@ public class PlayerScript : MonoBehaviour
     public GameObject projectilePrefab;  // 3D projectile prefab
     public float projectileSpeed = 10f;
     private LayerMask enemyLayer;
+    private int previousPose;
 
 
     void Start()
     {
-        
+        previousPose = -2;
+        datos.points = 0;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
@@ -77,6 +85,18 @@ public class PlayerScript : MonoBehaviour
                 lastActionTime = Time.time;
 
             }
+            if (poses.pose != previousPose)
+            {
+                previousPose = poses.pose;
+
+                if (HandlePoseCombat() == 1)
+                {
+                    
+                    lastActionTime = Time.time;
+
+                }
+            }
+
         }
         HandleVisuals();
 
@@ -110,10 +130,116 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = newVelocity;
     }
 
-    private int HandleCombat()
+    private int HandlePoseCombat()
     {
 
         if (!datos.CanAct()) return 0;
+
+        switch (poses.pose)
+        {
+            case 0: // Ataque ligero (Light Attack)
+
+                int backwards = renderSprite.flipX ? 1 : -1;
+                animator.SetBool("Attack", true);
+                rb.AddForce(new Vector3(backwards * 5f, 1.5f, 0f), ForceMode.Impulse);
+                Collider[] hits = Physics.OverlapSphere(attackPoint.position, attackRadius, playerLayer);
+
+                foreach (Collider hit in hits)
+                {
+                    if (hit != null)
+                    {
+                        EntityData targetData = hit.GetComponent<EntityData>();
+                        if (targetData != null)
+                        {
+                            MusicManager manager = FindObjectOfType<MusicManager>();
+                            manager.PlaySFX(hitsfx);
+                            datos.points += 10 + UnityEngine.Random.Range(-5, 6);
+                            targetData.reducirVida(2, transform.position);
+                            datos.aumentarSuper(1);
+                        }
+                    }
+                }
+                return 1;
+
+
+            case 1: // Ataque pesado (Heavy Attack)
+                animator.SetBool("Attack", true);
+                hits = Physics.OverlapSphere(attackPoint.position, attackRadius, playerLayer);
+
+                foreach (Collider hit in hits)
+                {
+                    if (hit != null)
+                    {
+                        EntityData targetData = hit.GetComponent<EntityData>();
+                        if (targetData != null)
+                        {
+                            MusicManager manager = FindObjectOfType<MusicManager>();
+                            manager.PlaySFX(hitsfx);
+                            datos.points += 50 + UnityEngine.Random.Range(-10, 11);
+                            targetData.reducirVida(5, transform.position);
+                            datos.aumentarSuper(2);
+                        }
+                    }
+                }
+                return 1;
+
+
+
+            case 2: // Bloqueo (Block)
+
+                animator.SetBool("Hurt", true);
+                backwards = renderSprite.flipX ? -1 : 1;
+
+                // Apply a force for knockback
+                rb.AddForce(new Vector3(backwards * 6f, 4.5f, 0f), ForceMode.Impulse);
+
+                // Ensure the grounded state is updated correctly
+                isGrounded = false;
+
+                return 1;
+
+
+            case 3: // Proyectil (Projectile)
+
+                if (datos.superGauge >= 3)
+                {
+                    // Instantiate the projectile at the attackPoint
+                    GameObject projectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
+                    Vector3 direction = new Vector3(2f, 0f, 0f);
+                    // Apply a force to the projectile to move it in the right direction
+                    Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+                    projectileRb.velocity = direction * projectileSpeed;
+
+                    // Set the projectile's destroy-on-collision behavior
+                    ProjectileBehavior projectileScript = projectile.GetComponent<ProjectileBehavior>();
+                    if (projectileScript != null)
+                    {
+                        projectileScript.enemyLayer = enemyLayer;
+                    }
+                    MusicManager manager = FindObjectOfType<MusicManager>();
+                    manager.PlaySFX(blastsfx);
+                    datos.aumentarSuper(-3);
+                    return 1;
+                }
+                break;
+
+            default:
+                Debug.LogWarning("Unknown pose value: " + poses.pose);
+                break;
+        }
+
+        return 0;
+
+    }
+
+    private int HandleCombat()
+    {
+        
+        if (!datos.CanAct()) return 0;
+
+        
+
+
 
         // Ataque ligero
         if (Input.GetKeyDown(KeyCode.J))
@@ -132,6 +258,9 @@ public class PlayerScript : MonoBehaviour
                     EntityData targetData = hit.GetComponent<EntityData>();
                     if (targetData != null)
                     {
+                        MusicManager manager = FindObjectOfType<MusicManager>();
+                        manager.PlaySFX(hitsfx);
+                        datos.points += 10 + UnityEngine.Random.Range(-5, 6);
                         targetData.reducirVida(2, transform.position);
                         datos.aumentarSuper(1);
                     }
@@ -153,7 +282,12 @@ public class PlayerScript : MonoBehaviour
                     EntityData targetData = hit.GetComponent<EntityData>();
                     if (targetData != null)
                     {
+                        MusicManager manager = FindObjectOfType<MusicManager>();
+                        manager.PlaySFX(hitsfx);
+                        datos.points += 50 + UnityEngine.Random.Range(-10, 11);
+
                         targetData.reducirVida(5, transform.position);
+
                         datos.aumentarSuper(2);
                     }
                 }
@@ -198,6 +332,8 @@ public class PlayerScript : MonoBehaviour
                 {
                     projectileScript.enemyLayer = enemyLayer;  // Set the enemy layer to check for collisions
                 }
+                MusicManager manager = FindObjectOfType<MusicManager>();
+                manager.PlaySFX(blastsfx);
                 datos.aumentarSuper(-3);
                 return 1;
             }
