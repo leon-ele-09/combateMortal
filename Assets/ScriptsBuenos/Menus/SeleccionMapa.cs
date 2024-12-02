@@ -21,6 +21,13 @@ public class SeleccionMapa : MonoBehaviour
 
         }
 
+        if (PlayerPrefs.GetInt("Mapa3", 0) == 1)
+        {
+
+            SceneManager.LoadScene("Castillo");
+
+        }
+
 
     }
     

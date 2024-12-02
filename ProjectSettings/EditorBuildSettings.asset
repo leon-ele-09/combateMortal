@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscenaBuena1.unity
     guid: 380212092860a9f41b3fa7f70567d25c
+  - enabled: 1
+    path: Assets/Scenes/Castillo.unity
+    guid: beb249126494d154785ac8bef802d716
   m_configObjects: {}

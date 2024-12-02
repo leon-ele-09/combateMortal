@@ -19,6 +19,7 @@ public class PlayerScript : MonoBehaviour
 
     public AudioClip hitsfx;
     public AudioClip blastsfx;
+    public AudioClip dodgesfx;
 
     /*
      aniadir colision de golpe, reducir vida, aumentar carga, aniadir muerte usando las funciones de ManejoDatos
@@ -132,6 +133,7 @@ public class PlayerScript : MonoBehaviour
 
     private int HandlePoseCombat()
     {
+        MusicManager manager = FindObjectOfType<MusicManager>();
 
         if (!datos.CanAct()) return 0;
 
@@ -151,7 +153,7 @@ public class PlayerScript : MonoBehaviour
                         EntityData targetData = hit.GetComponent<EntityData>();
                         if (targetData != null)
                         {
-                            MusicManager manager = FindObjectOfType<MusicManager>();
+                            //MusicManager manager1 = FindObjectOfType<MusicManager>();
                             manager.PlaySFX(hitsfx);
                             datos.points += 10 + UnityEngine.Random.Range(-5, 6);
                             targetData.reducirVida(2, transform.position);
@@ -173,7 +175,7 @@ public class PlayerScript : MonoBehaviour
                         EntityData targetData = hit.GetComponent<EntityData>();
                         if (targetData != null)
                         {
-                            MusicManager manager = FindObjectOfType<MusicManager>();
+                            
                             manager.PlaySFX(hitsfx);
                             datos.points += 50 + UnityEngine.Random.Range(-10, 11);
                             targetData.reducirVida(5, transform.position);
@@ -191,6 +193,8 @@ public class PlayerScript : MonoBehaviour
                 backwards = renderSprite.flipX ? -1 : 1;
 
                 // Apply a force for knockback
+                //MusicManager manager = FindObjectOfType<MusicManager>();
+                manager.PlaySFX(dodgesfx);
                 rb.AddForce(new Vector3(backwards * 6f, 4.5f, 0f), ForceMode.Impulse);
 
                 // Ensure the grounded state is updated correctly
@@ -216,7 +220,7 @@ public class PlayerScript : MonoBehaviour
                     {
                         projectileScript.enemyLayer = enemyLayer;
                     }
-                    MusicManager manager = FindObjectOfType<MusicManager>();
+                    //MusicManager manager3 = FindObjectOfType<MusicManager>();
                     manager.PlaySFX(blastsfx);
                     datos.aumentarSuper(-3);
                     return 1;
@@ -304,6 +308,8 @@ public class PlayerScript : MonoBehaviour
             int backwards = renderSprite.flipX ? -1 : 1;
 
             // Apply a force for knockback
+            MusicManager manager = FindObjectOfType<MusicManager>();
+            manager.PlaySFX(dodgesfx);
             rb.AddForce(new Vector3(backwards * 6f, 4.5f, 0f), ForceMode.Impulse);
 
             // Ensure the grounded state is updated correctly

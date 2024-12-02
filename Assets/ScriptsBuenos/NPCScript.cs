@@ -15,6 +15,7 @@ private float lastActionTime;
 
     public AudioClip hitsfx;
     public AudioClip blastsfx;
+    public AudioClip dodgesfx;
 
 
     /*
@@ -210,12 +211,14 @@ private int HandleCombat(int AI)
 
         int backwards = renderSprite.flipX ? -1 : 1;
 
-        // Apply a force for knockback
-        rb.AddForce(new Vector3(backwards * 6f, 4.5f, 0f), ForceMode.Impulse);
+            // Apply a force for knockback
+            MusicManager manager = FindObjectOfType<MusicManager>();
+            manager.PlaySFX(dodgesfx);
+            rb.AddForce(new Vector3(backwards * 6f, 4.5f, 0f), ForceMode.Impulse);
 
         // Ensure the grounded state is updated correctly
         isGrounded = false;
-
+        
         return 1;
     }
 

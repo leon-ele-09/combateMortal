@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class MapSelector : MonoBehaviour
 {
 
+    public bool map3;
     public bool map2;
     public bool map1;
 
@@ -42,11 +43,18 @@ public class MapSelector : MonoBehaviour
             case 1:
                 map1 = true;
                 map2 = false;
+                map3 = false;   
                 break;
 
             case 2:
                 map1 = false;
                 map2 = true;
+                map3 = false;
+                break;
+            case 3:
+                map1 = false;
+                map2 = false;
+                map3 = true;
                 break;
 
             default:
@@ -60,6 +68,8 @@ public class MapSelector : MonoBehaviour
     {
         PlayerPrefs.SetInt("Mapa1", map1 ? 1 : 0);
         PlayerPrefs.SetInt("Mapa2", map2 ? 1 : 0);
+        PlayerPrefs.SetInt("Mapa3", map3 ? 1 : 0);
+
         PlayerPrefs.Save();
     }
 
