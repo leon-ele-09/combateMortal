@@ -25,12 +25,12 @@
 ## 🧍‍♂️ Control por Poses (MediaPipe)
 
 El sistema de control por visión se basa en MediaPipe Pose, que detecta 33 puntos clave del cuerpo en tiempo real usando la cámara web. Se definen cuatro poses principales que corresponden a movimientos dentro del juego:
-
-|Pose	Acción en el juego|
-|Brazo derecho al frente	|Ataque ligero (J)|
-|	Brazo izquierdo al frente |Ataque pesado (K)|
-|Ambos brazos al frente| a la izquierda	Esquivar (L)|
-|Brazos abiertos al frente (Piensa en el kamehameha)	|Ataque de energía (U)|
+| Pose                                                | Accion de juego    |
+|-----------------------------------------------------|--------------------|
+| Brazo derecho al frente                             | Ataque Ligero      |
+| Brazo izquierdo al frente                           | Ataque Pesado      |
+| Ambos brazos al frente                              | Esquivar           |
+| Brazos abiertos al frente (Piensa en el kamehameha) | Ataque a distancia |
 
 Estas poses son procesadas mediante un sistema de reconocimiento basado en la comparación de ángulos entre articulaciones.
 
